@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "enum-plus": "latest"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
