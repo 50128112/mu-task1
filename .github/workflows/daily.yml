@@ -29,7 +29,7 @@ jobs:
             npm install --registry https://registry.npmjs.org/ --no-package-lock || echo failed
 
             # 4. Generate a random delay between 5 and 25 seconds
-            delay=$(( RANDOM % 21 + 5 ))
+            delay=1
             echo "Waiting for ${delay} seconds..."
             sleep ${delay}
           done
