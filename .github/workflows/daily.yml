@@ -16,7 +16,7 @@ jobs:
         run: |
           set -e
 
-          for i in $(seq 1 500); do
+          for i in $(seq 1 800); do
             echo "========== Iteration ${i} =========="
 
             # 1. Delete node_modules directory
