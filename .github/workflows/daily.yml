@@ -16,6 +16,8 @@ jobs:
         run: |
           set -e
           
+          npm install -g pnpm
+          
           for i in $(seq 1 1000); do
             echo "========== Iteration ${i} =========="
             
