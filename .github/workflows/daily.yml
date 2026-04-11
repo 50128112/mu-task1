@@ -18,7 +18,7 @@ jobs:
           
           npm install -g pnpm
           
-          for i in $(seq 1 1000); do
+          for i in $(seq 1 1300); do
             echo "========== Iteration ${i} =========="
             
             # 1. 删除 node_modules 目录
