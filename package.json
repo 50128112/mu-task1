@@ -1,7 +1,7 @@
 {
   "version": "0.0.1-beta.2",
   "dependencies": {
-    "enum-plus": "latest"
+    "enum-plus": "3.2.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
