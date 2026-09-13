@@ -21,7 +21,7 @@ jobs:
         run: |
           set -e
 
-          npm install -g pnpm
+          npm install -g pnpm@11.25.0
           
           # 判断今天是否为周一（date +%u：1=周一）
           is_monday=0
