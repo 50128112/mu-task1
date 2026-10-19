@@ -15,6 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Install sing-box
+        uses: ./.github/actions/install-sing-box
+        with:
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -23,10 +29,19 @@ jobs:
 
       - name: Run install loop from run.sh
         shell: bash
+        env:
+          HTTP_PROXY: http://127.0.0.1:10808
+          HTTPS_PROXY: http://127.0.0.1:10808
+          ALL_PROXY: http://127.0.0.1:10808
         run: |
           set -e
 
-          npm install -g pnpm@11.25.0
+          env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY npm install -g pnpm@11.25.0
+
+          pnpm config set proxy http://127.0.0.1:10808
+          pnpm config set https-proxy http://127.0.0.1:10808
+
+          pnpm config list | grep -i proxy
 
           # 判断今天是否为周一（date +%u：1=周一）
           is_monday=0
@@ -46,9 +61,9 @@ jobs:
 
             # 3. 安装依赖：周一安装 enum-plus@latest，其它日期执行无参 pnpm install
             if [ ${is_monday} -eq 1 ]; then
-              pnpm install enum-plus@latest --registry https://registry.npmjs.org/ --no-lockfile | grep 'done' || echo error
+              pnpm install enum-plus@latest --registry https://registry.npmjs.org/ --no-lockfile | grep 'downloaded 1'
             else
-              pnpm install --registry https://registry.npmjs.org/ --no-lockfile | grep 'done' || echo error
+              pnpm install --registry https://registry.npmjs.org/ --no-lockfile | grep 'downloaded 1'
             fi
 
             # 4. 生成1~2秒范围内的随机延时
@@ -58,3 +73,8 @@ jobs:
           done
 
           echo "All iterations completed."
+
+      - name: Print sing-box log
+        run: |
+          echo "=== sing-box log ==="
+          tail -n 200 /tmp/sing-box.log || true
