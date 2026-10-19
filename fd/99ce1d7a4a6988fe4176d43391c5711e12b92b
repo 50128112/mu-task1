@@ -1,0 +1,16 @@
+.github/actions/install-sing-box/action.yml
+  h_24534bcb786c27 1-9,10,11-14,15,16-19,20,21-24,25,26-79,80-81,82-169,170,171-172
+.github/workflows/daily.yml
+  h_24534bcb786c27 18-20,29,30-32,44,56,58,68-70,71,72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fd99ce1d7a4a6988fe4176d43391c5711e12b92b",
+  "prompts": {},
+  "humans": {
+    "h_24534bcb786c27": {
+      "author": "50128112 <51028112@qq.com>"
+    }
+  }
+}
