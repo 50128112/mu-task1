@@ -1,0 +1,14 @@
+.github/actions/install-sing-box/action.yml
+  h_24534bcb786c27 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c589e5a2b79fef19ba230c880d707899e9d1f485",
+  "prompts": {},
+  "humans": {
+    "h_24534bcb786c27": {
+      "author": "50128112 <51028112@qq.com>"
+    }
+  }
+}
