@@ -1,0 +1,14 @@
+.github/workflows/daily.yml
+  h_24534bcb786c27 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7766999a81488c55ca809afe50ad239484b0c0ba",
+  "prompts": {},
+  "humans": {
+    "h_24534bcb786c27": {
+      "author": "50128112 <51028112@qq.com>"
+    }
+  }
+}
