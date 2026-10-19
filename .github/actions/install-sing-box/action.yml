@@ -1,0 +1,172 @@
+name: Install sing-box
+description: Install sing-box (SagerNet) and start it with a bundled config
+
+inputs:
+  version:
+    description: >
+      sing-box version to install (e.g. "1.12.0"). Leave empty to install
+      the latest stable release.
+    required: false
+    default: ''
+
+  script-url:
+    description: URL of the sing-box install script.
+    required: false
+    default: 'https://sing-box.app/deb-install.sh'
+
+  config-path:
+    description: Destination path for the sing-box config file.
+    required: false
+    default: '/tmp/sing-box/config.json'
+
+  log-path:
+    description: Log file path for the background sing-box process.
+    required: false
+    default: '/tmp/sing-box.log'
+
+runs:
+  using: composite
+  steps:
+    - name: Install sing-box
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+        INSTALL_URL: ${{ inputs.script-url }}
+      run: |
+        set -euo pipefail
+
+        curl -fsSL "${INSTALL_URL}" | bash -s -- ${VERSION}
+
+        sing-box version
+
+    - name: Write config & start sing-box
+      shell: bash
+      env:
+        CONFIG_PATH: ${{ inputs.config-path }}
+        LOG_PATH: ${{ inputs.log-path }}
+      run: |
+        set -euo pipefail
+
+        CONFIG_DIR="$(dirname "${CONFIG_PATH}")"
+        mkdir -p "${CONFIG_DIR}"
+
+        cat > "${CONFIG_PATH}" <<'EOF'
+        {
+          "log": {
+            "level": "debug",
+            "timestamp": true
+          },
+
+          "dns": {
+            "servers": [
+              {
+                "type": "local",
+                "tag": "dns-local"
+              },
+              {
+                "type": "https",
+                "tag": "dns-remote",
+                "server": "8.8.8.8",
+                "server_port": 443,
+                "path": "/dns-query",
+                "detour": "proxy"
+              }
+            ],
+            "final": "dns-remote"
+          },
+
+          "inbounds": [
+            {
+              "type": "http",
+              "tag": "http-in",
+              "listen": "::",
+              "listen_port": 10808
+            }
+          ],
+
+          "outbounds": [
+            {
+              "type": "http",
+              "tag": "proxy",
+              "server": "ipsec.noapp.xyz",
+              "server_port": 44500,
+              "username": "shijistar",
+              "password": "zhenbao511",
+              "tls": {
+                "enabled": true,
+                "server_name": "ipsec.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "direct",
+              "tag": "direct",
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            }
+          ],
+
+          "route": {
+            "auto_detect_interface": true,
+
+            "default_domain_resolver": {
+              "server": "dns-local"
+            },
+
+            "rules": [
+              {
+                "action": "sniff",
+                "timeout": "1s"
+              },
+              {
+                "protocol": "dns",
+                "action": "hijack-dns"
+              },
+              {
+                "domain": ["us6.noapp.xyz"],
+                "outbound": "direct"
+              },
+              {
+                "domain": ["ipsec.noapp.xyz"],
+                "outbound": "direct"
+              },
+              {
+                "ip_cidr": ["72.11.134.114/32"],
+                "outbound": "direct"
+              },
+              {
+                "ip_is_private": true,
+                "outbound": "direct"
+              }
+            ],
+
+            "final": "proxy"
+          }
+        }
+        EOF
+
+        chmod 600 "${CONFIG_PATH}"
+        echo "Config written to ${CONFIG_PATH}"
+
+        # Validate config before starting
+        sing-box check -c "${CONFIG_PATH}"
+        echo "Config validation passed"
+
+        # Start sing-box in background (non-blocking)
+        nohup sing-box run -c "${CONFIG_PATH}" >"${LOG_PATH}" 2>&1 &
+        SING_BOX_PID=$!
+        disown || true
+
+        # Give it a moment to fail fast if something is wrong
+        sleep 2
+
+        if kill -0 "${SING_BOX_PID}" 2>/dev/null; then
+          echo "sing-box started (pid=${SING_BOX_PID}), log: ${LOG_PATH}"
+        else
+          echo "::error::sing-box failed to start. Last log lines:"
+          tail -n 200 "${LOG_PATH}" || true
+          exit 1
+        fi
