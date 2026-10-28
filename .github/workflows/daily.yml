@@ -79,7 +79,7 @@ jobs:
             fi
 
             # 4. 生成1~2秒范围内的随机延时
-            delay=$(( RANDOM % 2 + 1 ))
+            delay=$(( RANDOM % 2 + 3 ))
             echo "Waiting for ${delay} seconds..."
             sleep ${delay}
           done
