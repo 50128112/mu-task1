@@ -6,7 +6,7 @@ inputs:
     required: true
   password:
     required: true
-    
+
   version:
     description: >
       sing-box version to install (e.g. "1.12.0"). Leave empty to install
@@ -59,6 +59,8 @@ runs:
         nodes=( "wtw1" "wtw2" "wtw3" "wtw4" "wtw5" "wtw6" "whk1" "whk2" "whk3" "whk4" "whk5" "whk6" "whk7" "whk8" "whk9" "whk10" "wjp1" "wjp2" "wjp3" "wjp4" "wjp5" "wjp6" "wjp7" "wsg1" "wsg2" "wsg3" "wsg4" "wsg5" "wsg6" "wsg7" "wsg8" "wkr1" "wkr2" "wmy1" "wvn1" "win1" "wid1" "wth1" "wca1" "wus2" "wus3" "wus4" "wus5" "wus6" "wus7" "wus8" "wus9" "wus10" "wat1" )
         random_index=$((RANDOM % ${#nodes[@]}))
         node=${nodes[$random_index]}
+
+        echo "Selected node: ${node}"
 
         cat > "${CONFIG_PATH}" <<EOF
         {
