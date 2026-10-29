@@ -4,17 +4,17 @@ on:
   schedule:
     # UTC time
     - cron: "0 0 * * *"
-    - cron: "0 2 * * *"
-    - cron: "0 4 * * *"
-    - cron: "0 6 * * *"
-    - cron: "0 8 * * *"
-    - cron: "0 10 * * *"
-    - cron: "0 12 * * *"
-    - cron: "0 14 * * *"
-    - cron: "0 16 * * *"
-    - cron: "0 18 * * *"
-    - cron: "0 20 * * *"
-    - cron: "0 22 * * *"
+    - cron: "5 2 * * *"
+    - cron: "10 4 * * *"
+    - cron: "15 6 * * *"
+    - cron: "20 8 * * *"
+    - cron: "25 10 * * *"
+    - cron: "30 12 * * *"
+    - cron: "35 14 * * *"
+    - cron: "40 16 * * *"
+    - cron: "45 18 * * *"
+    - cron: "50 20 * * *"
+    - cron: "55 22 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
             is_monday=1
           fi
 
-          for i in $(seq 1 120); do
+          for i in $(seq 1 100); do
             echo
             echo "========== Iteration ${i} =========="
 
