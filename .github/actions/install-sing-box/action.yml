@@ -3,8 +3,10 @@ description: Install sing-box (SagerNet) and start it with a bundled config
 
 inputs:
   username:
+    description: The username for the sing-box vpn nodes.
     required: true
   password:
+    description: The password for the sing-box vpn nodes.
     required: true
 
   version:
@@ -56,7 +58,7 @@ runs:
 
         CONFIG_DIR="$(dirname "${CONFIG_PATH}")"
         mkdir -p "${CONFIG_DIR}"
-        nodes=( "wtw1" "wtw2" "wtw3" "wtw4" "wtw5" "wtw6" "whk1" "whk2" "whk3" "whk4" "whk5" "whk6" "whk7" "whk8" "whk9" "whk10" "wjp1" "wjp2" "wjp3" "wjp4" "wjp5" "wjp6" "wjp7" "wsg1" "wsg2" "wsg3" "wsg4" "wsg5" "wsg6" "wsg7" "wsg8" "wkr1" "wkr2" "wmy1" "wvn1" "win1" "wid1" "wth1" "wca1" "wus2" "wus3" "wus4" "wus5" "wus6" "wus7" "wus8" "wus9" "wus10" "wat1" )
+        nodes=( "wtw1" "wtw2" "wtw3" "wtw4" "wtw5" "wtw6" "whk1" "whk2" "whk3" "whk4" "whk5" "whk6" "whk7" "whk8" "whk9" "whk10" "wjp1" "wjp2" "wjp3" "wjp4" "wjp5" "wjp6" "wjp7" "wsg1" "wsg2" "wsg3" "wsg4" "wsg5" "wsg6" "wsg7" "wsg8" "wkr1" "wkr2" "wmy1" "wvn1" "win1" "wid1" "wth1" "wca1" "wus2" "wus3" "wus4" "wus5" "wus6" "wus7" "wus8" "wus9" "wus10" "wat1" "wfr1" "wde1" "wde2" "wie1" "wnl1" "wru1" "wru2" "wes1" "wse1" "wch1" "wuk1" "wau1" )
         random_index=$((RANDOM % ${#nodes[@]}))
         node=${nodes[$random_index]}
 
@@ -824,6 +826,186 @@ runs:
               }
             },
             {
+              "type": "http",
+              "tag": "wfr1",
+              "server": "wfr1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wfr1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wde1",
+              "server": "wde1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wde1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wde2",
+              "server": "wde2.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wde2.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wie1",
+              "server": "wie1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wie1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wnl1",
+              "server": "wnl1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wnl1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wru1",
+              "server": "wru1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wru1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wru2",
+              "server": "wru2.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wru2.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wes1",
+              "server": "wes1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wes1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wse1",
+              "server": "wse1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wse1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wch1",
+              "server": "wch1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wch1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wuk1",
+              "server": "wuk1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wuk1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
+              "type": "http",
+              "tag": "wau1",
+              "server": "wau1.noapp.xyz",
+              "server_port": 44500,
+              "username": "$USERNAME",
+              "password": "$PASSWORD",
+              "tls": {
+                "enabled": true,
+                "server_name": "wau1.noapp.xyz"
+              },
+              "domain_resolver": {
+                "server": "dns-local"
+              }
+            },
+            {
               "type": "urltest",
               "tag": "auto",
               "outbounds": [
@@ -875,7 +1057,19 @@ runs:
                 "wus8",
                 "wus9",
                 "wus10",
-                "wat1"
+                "wat1",
+                "wfr1",
+                "wde1",
+                "wde2",
+                "wie1",
+                "wnl1",
+                "wru1",
+                "wru2",
+                "wes1",
+                "wse1",
+                "wch1",
+                "wuk1",
+                "wau1"
               ],
               "url": "https://www.gstatic.com/generate_204",
               "interval": "3m",
@@ -936,7 +1130,19 @@ runs:
                 "wus8",
                 "wus9",
                 "wus10",
-                "wat1"
+                "wat1",
+                "wfr1",
+                "wde1",
+                "wde2",
+                "wie1",
+                "wnl1",
+                "wru1",
+                "wru2",
+                "wes1",
+                "wse1",
+                "wch1",
+                "wuk1",
+                "wau1"
               ],
               "default": "$node",
               "interrupt_exist_connections": false
@@ -966,7 +1172,13 @@ runs:
               {
                 "domain": [
                   "wat1.noapp.xyz",
+                  "wau1.noapp.xyz",
                   "wca1.noapp.xyz",
+                  "wch1.noapp.xyz",
+                  "wde1.noapp.xyz",
+                  "wde2.noapp.xyz",
+                  "wes1.noapp.xyz",
+                  "wfr1.noapp.xyz",
                   "whk1.noapp.xyz",
                   "whk10.noapp.xyz",
                   "whk2.noapp.xyz",
@@ -978,6 +1190,7 @@ runs:
                   "whk8.noapp.xyz",
                   "whk9.noapp.xyz",
                   "wid1.noapp.xyz",
+                  "wie1.noapp.xyz",
                   "win1.noapp.xyz",
                   "wjp1.noapp.xyz",
                   "wjp2.noapp.xyz",
@@ -989,6 +1202,10 @@ runs:
                   "wkr1.noapp.xyz",
                   "wkr2.noapp.xyz",
                   "wmy1.noapp.xyz",
+                  "wnl1.noapp.xyz",
+                  "wru1.noapp.xyz",
+                  "wru2.noapp.xyz",
+                  "wse1.noapp.xyz",
                   "wsg1.noapp.xyz",
                   "wsg2.noapp.xyz",
                   "wsg3.noapp.xyz",
@@ -1004,6 +1221,7 @@ runs:
                   "wtw4.noapp.xyz",
                   "wtw5.noapp.xyz",
                   "wtw6.noapp.xyz",
+                  "wuk1.noapp.xyz",
                   "wus10.noapp.xyz",
                   "wus2.noapp.xyz",
                   "wus3.noapp.xyz",
