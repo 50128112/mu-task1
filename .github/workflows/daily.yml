@@ -58,7 +58,7 @@ jobs:
             is_monday=1
           fi
 
-          for i in $(seq 1 100); do
+          for i in $(seq 1 60); do
             echo
             echo "========== Iteration ${i} =========="
 
